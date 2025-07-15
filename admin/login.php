@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
         if ($user['role'] == 'admin') {
             header("Location: dashboard.php");
         } else {
-            header("Location: customer_dashboard.php");
+            header("Location: ../users/index.php");
         }
     } else {
         echo "<script>alert('Invalid credentials');</script>";
