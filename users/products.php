@@ -1,7 +1,7 @@
 <?php 
 include 'header.php'; 
 include 'dbconfig.php'; 
-include 'auth_check.php'; 
+// include 'auth_check.php'; 
 ?>
 
 <?php
@@ -25,6 +25,7 @@ $products = mysqli_query($conn, "SELECT * FROM products WHERE cat_id = $cat_id")
             <h5 class="card-title"><?= htmlspecialchars($p['name']) ?></h5>
             <p class="card-text"><?= $p['des'] ?></p>
             <p class="text-primary fw-bold">Rs. <?= $p['price'] ?></p>
+
             <form method="POST" action="cart_add.php">
               <input type="hidden" name="product_id" value="<?= $p['id'] ?>">
               <div class="input-group mb-2">
@@ -34,6 +35,7 @@ $products = mysqli_query($conn, "SELECT * FROM products WHERE cat_id = $cat_id")
               </div>
               <button type="submit" class="btn btn-success w-100">Add to Cart</button>
             </form>
+            
           </div>
         </div>
       </div>

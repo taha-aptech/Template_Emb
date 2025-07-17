@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2025 at 09:58 AM
+-- Generation Time: Jul 17, 2025 at 06:27 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,13 @@ CREATE TABLE `addtocart` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `added_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `addtocart`
+--
+
+INSERT INTO `addtocart` (`id`, `user_id`, `product_id`, `quantity`, `added_at`) VALUES
+(2, 2, 2, 1, '2025-07-17 04:24:40');
 
 -- --------------------------------------------------------
 
@@ -72,6 +79,13 @@ CREATE TABLE `checkout` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `checkout`
+--
+
+INSERT INTO `checkout` (`id`, `user_id`, `order_id`, `address`, `city`, `zip_code`, `phone`, `created_at`) VALUES
+(1, 2, 1, 'Saddar', 'Karachi', '56230', '03210555321', '2025-07-16 06:53:20');
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +98,13 @@ CREATE TABLE `orders` (
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('pending','confirmed','shipped','delivered','cancelled') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `order_date`, `status`) VALUES
+(1, 2, '2025-07-16 06:53:20', 'pending');
 
 -- --------------------------------------------------------
 
@@ -99,6 +120,13 @@ CREATE TABLE `order_details` (
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(1, 1, 1, 2, '5000.00');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +141,13 @@ CREATE TABLE `payment` (
   `status` enum('pending','paid','failed') DEFAULT 'pending',
   `paid_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `order_id`, `amount`, `method`, `status`, `paid_at`) VALUES
+(1, 1, '10000.00', 'cash_on_delivery', 'pending', '2025-07-16 06:53:20');
 
 -- --------------------------------------------------------
 
@@ -134,7 +169,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `des`, `price`, `image`, `cat_id`) VALUES
-(1, 'Shoes', 'comfortable shoes for Men', '5000.00', 'shoes1.jfif', 3);
+(1, 'Shoes', 'comfortable shoes for Men', '5000.00', 'shoes1.jfif', 3),
+(2, 'Women Joggers', 'Soft and comfortable joggers for daily routine', '4500.00', 'women.jfif', 2),
+(3, 'Party shoes', 'Kids favorite all time', '2500.00', 'kids.jfif', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +193,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES
-(1, 'admin', 'admin123@gmail.com', '$2y$10$EE17dbZmYutSNaoLyGBrj.574Lme7FmjzbnSNDWafFseq3gZMzHcK', 'admin', '2025-07-10 09:52:17');
+(1, 'admin', 'admin123@gmail.com', '$2y$10$EE17dbZmYutSNaoLyGBrj.574Lme7FmjzbnSNDWafFseq3gZMzHcK', 'admin', '2025-07-10 09:52:17'),
+(2, 'taha', 'taha@gmail.com', '$2y$10$BiH98gKaDDXSvWs0sxBLAOcZg.l5uqb2jA/n./HMViuE2tMSd0YPK', 'customer', '2025-07-15 09:57:40');
 
 --
 -- Indexes for dumped tables
@@ -228,7 +266,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addtocart`
 --
 ALTER TABLE `addtocart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -240,37 +278,37 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
